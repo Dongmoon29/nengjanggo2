@@ -1,0 +1,44 @@
+var chartDataStr = decodeHtml(chartData);
+var chartJsonArray = JSON.parse(chartDataStr);
+
+var arrayLength = chartJsonArray.length;
+
+var numericData = [];
+var labelData = [];
+
+for(var i=0; i < arrayLength; i++){
+    numericData[i] = chartJsonArray[i].count;
+    labelData[i] = chartJsonArray[i].category;
+}
+
+// For a pie chart
+new Chart(document.getElementById("myPieChart"), {
+    type: 'pie',
+    // The data for our dataset
+    data: {
+        labels: labelData,
+        datasets: [{
+            label: 'My First dataset',
+            backgroundColor: ["#3e95cd","#8e5ea2","#3cba9f","#800e2a","#451a4f","#ccc923","#ccc923","#807f65"],
+            data: numericData
+        }]
+    },
+
+    // Configuration options go here
+    options: {
+        title: {
+            display: true,
+            text: '냉장고 음식 종류 현황'
+        }
+
+    }
+});
+
+
+
+// "[{"value": 1, "label": "COMPLETED"},{"value": 2, "label": "INPROGRESS"},{"value": 1, "label": "NOTSTARTED"}]"
+function decodeHtml(html){
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+}

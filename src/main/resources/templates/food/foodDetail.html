@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/header::userHead"></head>
+<body>
+<div th:replace="layout/top::header"></div>
+<div class="container">
+
+    <div class="alert alert-warning" role="alert" th:if="${account == null}">
+        냉장고를 사용하시려면 <a th:href="@{/login}" class="alert-link">로그인</a>을 해주세요.
+    </div>
+
+    <div class="alert alert-warning" role="alert" th:if="${account != null && !account.emailVerified}">
+        가입을 완료하려면 <a th:href="@{/checkConfirmMail}" class="alert-link">계정 인증 이메일을 확인</a>하세요.
+    </div>
+
+    <div class="row align-items-start" th:if="${account != null && account.emailVerified}">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <div style="padding-top:10px;" class="nav flex-column nav-pills" aria-orientation="vertical">
+                            <a th:href="@{/}" style="margin:5px;" class="nav-link text-primary">대시보드</a>
+                            <a th:href="@{/nengjanggo}" style="margin:5px;" class="nav-link active">내 냉장고</a>
+                            <a th:href="@{/overview}" style="margin:5px;" class="nav-link text-primary">오버뷰</a>
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div th:if="${account != null && account.emailVerified}" class="col-md-8">
+
+            <div class="alert alert-info col-md-7" role="alert" style="margin-top: 5px">
+                <h4 th:text="${food.name} + '의 상세정보'"></h4>
+            </div>
+            <div>
+                <a class="btn btn-lg btn-dark" th:href="@{/nengjanggo}">냉장고로!</a>
+
+                    <form th:action="@{'/food/' + ${food.id} + '/delete'}" method="post" class="form-inline">
+                        <button class="btn btn-danger" th:text="${food.name} + '삭제'"></button>
+                    </form>
+
+            </div>
+
+            <div style="padding-top:20px;"  class="col-lg-12" >
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <td> 식품명 </td>
+                        <td> 브랜드 </td>
+                        <td> 식품종류 </td>
+                        <td> 구입날짜 </td>
+                        <td> 개봉날짜 </td>
+                        <td> 유통기한 </td>
+                        <td> 식품수량 </td>
+
+                        <td>
+
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:text="${food.name}"></td>
+                        <td th:text="${food.brand}"></td>
+                        <td th:text="${food.category}"></td>
+                        <td th:text="${food.boughtAt}"></td>
+                        <td th:text="${food.openedAt}"></td>
+                        <td th:text="${food.expiredAt}"></td>
+                        <td th:text="${food.quantity}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div th:replace="layout/footer::footer"></div>
+</body>
+</html>
