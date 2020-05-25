@@ -1,6 +1,9 @@
 package com.nengjanggo2.demo.account;
 
+import com.nengjanggo2.demo.config.AppProperties;
 import com.nengjanggo2.demo.domain.Account;
+import com.nengjanggo2.demo.email.EmailMessage;
+import com.nengjanggo2.demo.email.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,6 +20,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -28,7 +33,10 @@ public class AccountService implements UserDetailsService {
 
     private final AccountRepository accountRepository;
     private final JavaMailSender javaMailSender;
+    private final EmailService emailService;
     private final PasswordEncoder passwordEncoder;
+    private final TemplateEngine templateEngine;
+    private final AppProperties appProperties;
 
     public Account saveNewAccount(@ModelAttribute @Valid RegistrationForm form) {
         Account account = Account.builder()
@@ -43,11 +51,22 @@ public class AccountService implements UserDetailsService {
     }
 
     public void sendConfirmEmail(Account savedAccount) {
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(savedAccount.getEmail());
-        mailMessage.setSubject("냉장고 회원가입 인증");
-        mailMessage.setText("/check-email-token?token="+ savedAccount.getEmailCheckToken() + "&email=" + savedAccount.getEmail());
-        javaMailSender.send(mailMessage);
+        Context context = new Context();
+        context.setVariable("link", "/check-email-token?token="+ savedAccount.getEmailCheckToken() + "&email=" + savedAccount.getEmail());
+        context.setVariable("nickname", savedAccount.getNickname());
+        context.setVariable("linkName", "이메일 인증하기");
+        context.setVariable("message", "링크를 클릭하세요");
+        context.setVariable("host", appProperties.getHost());
+        String message = templateEngine.process("mail/simple-link", context);
+
+
+        EmailMessage emailMessage = EmailMessage.builder()
+                .to(savedAccount.getEmail())
+                .subject("냉장고 회원가입 인증")
+                .message(message)
+                .build();
+
+        emailService.sendEmail(emailMessage);
     }
 
     public Account processNewAccount(RegistrationForm form) {

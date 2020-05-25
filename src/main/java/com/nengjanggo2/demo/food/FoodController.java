@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -106,6 +107,9 @@ public class FoodController {
         model.addAttribute("foodBrands", jsonString2);
 
         List<FavoriteBrand> mostFavoriteBrand = foodService.getMostFavoriteBrand(account);
+        if(mostFavoriteBrand.size() == 0) {
+            mostFavoriteBrand = null;
+        }
         model.addAttribute("favoriteBrand", mostFavoriteBrand);
 
         Integer numberOfExpiredFood = foodService.getNumberOfExpiredFood(account);

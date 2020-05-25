@@ -43,7 +43,6 @@ public class FoodForm {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "유통기한은 공백일 수 없습니다.")
-//    @Future(message = "유통기한 날짜를 다시 확인해주세요 (현재 날짜보다 지난 날짜이여야함.)")
     private LocalDate expiredAt;
 
     @Min(value = 1, message = "1이상의 숫자를 입력해주세요")

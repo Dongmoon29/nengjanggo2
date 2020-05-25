@@ -48,6 +48,19 @@ public class FoodService {
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
 
         Slice<FavoriteBrand> pagedResult = foodRepository.getMostFavoriteBrandFood(account, paging);
+        if(pagedResult == null) {
+            pagedResult.getContent().add(0, new FavoriteBrand() {
+                @Override
+                public String getBrandName() {
+                    return "none";
+                }
+
+                @Override
+                public long getFoodQuantity() {
+                    return 0;
+                }
+            });
+        }
 
         return pagedResult.getContent();
     }

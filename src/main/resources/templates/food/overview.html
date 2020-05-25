@@ -65,13 +65,17 @@
                             <tbody>
                             <tr>
                                 <td class="no">01</td>
-                                <td class="text-left">
+                                <td class="text-left" th:if="${favoriteBrand == null}">
+                                    <h3 th:text="${account.nickname} + '님은 현재 등록된 식품브랜드가 없습니다.'"></h3>
+                                </td>
+                                <td class="unit" th:if="${favoriteBrand == null}">0개</td>
+                                <td class="text-left" th:if="${favoriteBrand != null}">
                                 <h3 th:text="${account.nickname} + '님이 가장 선호하시는 브랜드는' + ${favoriteBrand.get(0).getBrandName()} + '입니다.'"></h3>
 
-                                    <a target="_blank" th:href="@{/favoriteFoodBrandProduct/{brandName} (brandName=${favoriteBrand.get(0).getBrandName()})}" th:text="${favoriteBrand.get(0).getBrandName()}"></a>
+                                    <a th:if="${favoriteBrand != null}" target="_blank" th:href="@{/favoriteFoodBrandProduct/{brandName} (brandName=${favoriteBrand.get(0).getBrandName()})}" th:text="${favoriteBrand.get(0).getBrandName()}"></a>
                                      상품들 보기!
                                 </td>
-                                <td class="unit" th:text="${favoriteBrand.get(0).getFoodQuantity()} + '개 입니다.'">1개</td>
+                                <td th:if="${favoriteBrand != null}" class="unit" th:text="${favoriteBrand.get(0).getFoodQuantity()} + '개 입니다.'">1개</td>
 
                             </tr>
                             <tr>

@@ -47,6 +47,20 @@ public class Food {
 
     private boolean isExpired = false;
 
+    public Food(String name, String category, String brand, Account account, LocalDate boughtAt, LocalDate expiredAt, LocalDate openedAt, int quantity, boolean isOpened, boolean isExpired) {
+        this.name = name;
+        this.account = account;
+        this.category = category;
+        this.brand = brand;
+        this.boughtAt = boughtAt;
+        this.expiredAt = expiredAt;
+        this.openedAt = openedAt;
+        this.quantity = quantity;
+        this.isOpened = isOpened;
+        this.isExpired = isExpired;
+    }
+
+
     public void openedFood() {
         if (this.openedAt != null) {
             this.isOpened = true;

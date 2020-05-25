@@ -33,44 +33,22 @@
             <div class="alert alert-info col-md-7" role="alert" style="margin-top: 5px">
                 <h4 th:text="${food.name} + '의 상세정보'"></h4>
             </div>
-            <div>
-                <a class="btn btn-lg btn-dark" th:href="@{/nengjanggo}">냉장고로!</a>
 
-                    <form th:action="@{'/food/' + ${food.id} + '/delete'}" method="post" class="form-inline">
-                        <button class="btn btn-danger" th:text="${food.name} + '삭제'"></button>
-                    </form>
+            <div class="card">
+                <div class="container-fliud">
+                    <div class="row">
+                        <div class="card col-12" >
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="'식품명 : ' + ${food.name}">Card title</h5>
+                                <h6 class="card-subtitle mb-2 text-muted" th:text="'식품 브랜드 : ' + ${food.brand}">Card subtitle</h6>
+                                <p class="card-text" th:text="'구입날짜 : ' + ${food.boughtAt}"></p>
+                                <p class="card-text" th:text="'유통기한 만료날짜 : ' + ${food.expiredAt}"></p>
+                                <p class="card-text" th:text="'개봉날짜 : ' + ${food.openedAt}"></p>
 
-            </div>
-
-            <div style="padding-top:20px;"  class="col-lg-12" >
-                <table class="table table-bordered table-striped">
-                    <thead class="thead-dark">
-                    <tr>
-                        <td> 식품명 </td>
-                        <td> 브랜드 </td>
-                        <td> 식품종류 </td>
-                        <td> 구입날짜 </td>
-                        <td> 개봉날짜 </td>
-                        <td> 유통기한 </td>
-                        <td> 식품수량 </td>
-
-                        <td>
-
-                        </td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td th:text="${food.name}"></td>
-                        <td th:text="${food.brand}"></td>
-                        <td th:text="${food.category}"></td>
-                        <td th:text="${food.boughtAt}"></td>
-                        <td th:text="${food.openedAt}"></td>
-                        <td th:text="${food.expiredAt}"></td>
-                        <td th:text="${food.quantity}"></td>
-                    </tr>
-                    </tbody>
-                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
