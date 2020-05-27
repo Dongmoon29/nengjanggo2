@@ -1,7 +1,7 @@
 package com.nengjanggo2.demo.account;
 
+import com.nengjanggo2.demo.account.dto.RegistrationForm;
 import com.nengjanggo2.demo.domain.Account;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +22,14 @@ public class AccountController {
     private final AccountRepository accountRepository;
     private final RegistrationFormValidator registrationFormValidator;
 
+    /*
+        회원가입 폼 validator
+    */
     @InitBinder
     public void registrationValidation(WebDataBinder webDataBinder) {
         webDataBinder.addValidators(registrationFormValidator);
     }
-
+    // 회원가입 페이지 콘트롤러
     @GetMapping("/registration")
     public String registrationForm(Model model) {
         model.addAttribute("registrationForm", new RegistrationForm());

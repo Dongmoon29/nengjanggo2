@@ -1,4 +1,4 @@
-package com.nengjanggo2.demo.food;
+package com.nengjanggo2.demo.food.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

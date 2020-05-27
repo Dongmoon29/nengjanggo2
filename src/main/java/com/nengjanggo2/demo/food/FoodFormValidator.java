@@ -1,10 +1,11 @@
 package com.nengjanggo2.demo.food;
 
+import com.nengjanggo2.demo.food.dto.FoodForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-
+//식품등록 Custom validator
 @Component
 @RequiredArgsConstructor
 public class FoodFormValidator implements Validator {

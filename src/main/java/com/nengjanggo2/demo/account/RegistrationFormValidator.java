@@ -1,10 +1,11 @@
 package com.nengjanggo2.demo.account;
 
+import com.nengjanggo2.demo.account.dto.RegistrationForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-
+//사용자 회원가입 시 사용되는 Form validator
 @Component
 @RequiredArgsConstructor
 public class RegistrationFormValidator implements Validator {

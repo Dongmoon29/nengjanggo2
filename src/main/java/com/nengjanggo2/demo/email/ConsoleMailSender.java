@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.mail.internet.MimeMessage;
 import java.io.InputStream;
-
+// local 개발환경에서 쓰일 mailSender
 @Profile("local")
 @Component
 @Slf4j
