@@ -22,7 +22,7 @@ public class FoodForm {
 
     @NotBlank(message = "식품이름은 공백이면 안됩니다.")
     @Length(min = 1, max = 30, message = "최소 1글자에서 30글자로 작성해주세요")
-    @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-z0-9_-]{1,30}$", message = "한글과 영문소문자 특수문자는 _ , -  만 가능합니다")
+    @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-zA-Z0-9_-]{1,30}$", message = "한글과 영문소문자 특수문자는 _ , -  만 가능합니다")
     private String name;
 
     private boolean isOpened = false;
