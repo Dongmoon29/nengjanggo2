@@ -50,7 +50,6 @@ public class AccountService implements UserDetailsService {
     // authentication 이메일 전송 메소드
     public void sendConfirmEmail(Account savedAccount) {
         //이메일 구현 부
-        //Context는 Model과 비슷한 기능을 하는 클래스라고 보면된다.
         Context context = new Context();
         context.setVariable("link", "/check-email-token?token="+ savedAccount.getEmailCheckToken() + "&email=" + savedAccount.getEmail());
         context.setVariable("nickname", savedAccount.getNickname());
