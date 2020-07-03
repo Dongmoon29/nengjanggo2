@@ -18,6 +18,17 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class FoodForm {
 
+    public FoodForm(Long id, String name, String category, String brand, LocalDate openedAt, LocalDate boughtAt, LocalDate expiredAt, int quantity) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.brand = brand;
+        this.openedAt = openedAt;
+        this.boughtAt = boughtAt;
+        this.expiredAt = expiredAt;
+        this.quantity = quantity;
+    }
+
     private Long id;
 
     @NotBlank(message = "식품이름은 공백이면 안됩니다.")

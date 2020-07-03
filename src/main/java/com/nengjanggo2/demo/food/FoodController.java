@@ -62,6 +62,23 @@ public class FoodController {
         return "food/foodList";
     }
 
+//     사용자의 음식 수정 페이지
+    @GetMapping("/food/{foodId}/edit")
+    public String editFoodPage(@CurrentUser Account account, Model model, @PathVariable("foodId") Long foodId) {
+        model.addAttribute("account", account);
+
+        Food food = foodService.getFoodDetail(account, foodId);
+        model.addAttribute("foodForm",new FoodForm(food.getId(), food.getName(), food.getCategory(), food.getBrand(), food.getOpenedAt(), food.getBoughtAt(), food.getExpiredAt(), food.getQuantity()));
+        return "food/editFood";
+    }
+
+    //사용자 음식수정 폼 핸들러
+    @PostMapping("/food/{foodId}/edit")
+    public String editFoodDetail(@CurrentUser Account account, Model model, @PathVariable("foodId") Long foodId, @ModelAttribute @Valid FoodForm foodForm, Errors errors) {
+        Food food = foodService.updateFood(account, foodForm);
+        return "redirect:/nengjanggo";
+    }
+
     // 사용자의 유통기한 만료 음식 페이지
     @GetMapping("/expiredFoodList")
     public String getExpiredFoodList(@CurrentUser Account account, Model model) {

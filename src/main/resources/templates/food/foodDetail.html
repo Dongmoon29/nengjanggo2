@@ -44,7 +44,7 @@
                                 <p class="card-text" th:text="'구입날짜 : ' + ${food.boughtAt}"></p>
                                 <p class="card-text" th:text="'유통기한 만료날짜 : ' + ${food.expiredAt}"></p>
                                 <p class="card-text" th:text="'개봉날짜 : ' + ${food.openedAt}"></p>
-
+                                <a th:href="@{/food/{foodId}/edit (foodId=${food.getId()})}" th:text="수정하기"></a>
                             </div>
                         </div>
                     </div>

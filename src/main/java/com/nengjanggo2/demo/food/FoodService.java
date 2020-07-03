@@ -82,8 +82,24 @@ public class FoodService {
 
         food.expiredFood();
         food.openedFood();
+        return foodRepository.save(food);
+    }
 
+    public Food updateFood(Account account, FoodForm form) {
+        Food food = Food.builder()
+                .account(account)
+                .id(form.getId())
+                .name(form.getName())
+                .category(form.getCategory())
+                .brand(form.getBrand())
+                .quantity(form.getQuantity())
+                .boughtAt(form.getBoughtAt())
+                .openedAt(form.getOpenedAt())
+                .expiredAt(form.getExpiredAt())
+                .build();
 
+        food.expiredFood();
+        food.openedFood();
         return foodRepository.save(food);
     }
 
